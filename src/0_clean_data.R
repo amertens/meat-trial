@@ -98,11 +98,11 @@ Mode <- function(x) {
 for(i in Wvars){
   cat(i, "\n")
   print(summary(d[[i]]))
-  if(class(d[[i]])=="numeric"){
-    d[is.na(d[[i]]),i] <- median(d[[i]], na.rm=T)
-  }else{
-    d[is.na(d[[i]]),i] <- Mode(d[[i]])
-  }
+  # if(class(d[[i]])=="numeric"){
+  #   d[is.na(d[[i]]),i] <- median(d[[i]], na.rm=T)
+  # }else{
+  #   d[is.na(d[[i]]),i] <- Mode(d[[i]])
+  # }
 }
 
 # Secondary exploratory DVs= messenger trust, animal adv eval_1, animal adv eval_2, animal adv eval_3, animal adv eval_4, animal adv 
