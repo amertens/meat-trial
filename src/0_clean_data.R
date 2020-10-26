@@ -47,6 +47,13 @@ d$ave_cov_att[is.na(d$COVID.attitudes_1) | is.na(d$COVID.attitudes_2) | is.na(d$
 
 summary(d$ave_cov_att)
 
+table(d$pre.plant.attitudes)
+table(d$Pre.behavioral.int)
+table(is.na(d$Pre.behavioral.int))
+d$Pre.behavioral.int2 <- ifelse(d$Pre.behavioral.int==6,1,0)
+d$Pre.behavioral.int2[is.na(d$Pre.behavioral.int)] <- NA
+d$Pre.behavioral.int <- d$Pre.behavioral.int2
+
 #Clean covariates and collapse sparse categories
 # table(d$Age)
 # d$Age[d$Age==11] <- 10

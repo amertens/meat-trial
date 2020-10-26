@@ -1,0 +1,58 @@
+---
+title: "regression coefficients"
+author: "Andrew Mertens"
+date: "10/25/2020"
+output: html_document
+---
+
+
+
+```{r, include = FALSE}
+
+
+rm(list=ls())
+library(tidyverse)
+library(caret)
+library(washb)
+library(multcomp)
+library(here)
+
+source(here("meat_trial_functions.R"))
+
+
+load(here("data/analysis_dataset.Rdata"))
+
+
+
+
+Wdf <- d %>% subset(., select=Wvars)
+
+
+
+```
+
+
+## How likely are you to try replacing animal products with plant-based alternatives (e.g. impossible burger, vegan cheese) in some of your meals in the next month?
+
+
+
+```{r}
+res_Y1 <- meat.glm(Yname=Yvars[1], Ws=Wdf, data=d, family="gaussian")
+
+```
+
+
+## How likely are you to try to reduce your overall meat consumption in the next month?
+
+```{r}
+res_Y2 <- meat.glm(Yname=Yvars[2], Ws=Wdf, data=d, family="gaussian")
+
+```
+
+## How likely are you to encourage your friends or family to try plant-based alternatives to animal products in the next month?
+
+```{r}
+res_Y3 <- meat.glm(Yname=Yvars[3], Ws=Wdf, data=d, family="gaussian")
+
+```
+

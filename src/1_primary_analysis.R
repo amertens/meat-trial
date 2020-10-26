@@ -83,8 +83,13 @@ save(res_sec_adj,
      file=here("results/adjusted_secondary_results.rdata"))
 
 
-res_Y1_unadj
-res_Y1
+#-------------------------------------------------------
+# Sensitivity analysis - adjusted ordered logistic regressions
+#-------------------------------------------------------
 
-res_Y2_unadj
-res_Y2
+ord_Y1<- polr_format(Yvar=Yvars[4], Ws=Wdf, df=d)
+ord_Y2<- polr_format(Yvar=Yvars[5], Ws=Wdf, df=d)
+ord_Y3<- polr_format(Yvar=Yvars[6], Ws=Wdf, df=d)
+
+save(Yvars, ord_Y1, ord_Y2, ord_Y3, 
+     file=here("results/unadjusted_ordered_logistic_results.rdata"))

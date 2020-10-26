@@ -34,7 +34,7 @@ df <- df %>%
   mutate(ci.lb = est - 1.96*se,
          ci.ub = est + 1.96*se) %>%
   #arrange(reference, reference) %>%
-  mutate(contrast = paste0(intervention, " vs. ", reference), 
+  mutate(contrast = paste0(intervention, " (ref: ", reference,")"), 
          contrast = factor(contrast, levels = rev(unique(contrast))),
          Y = case_when(Y=="Y1" ~ "How likely are you to try replacing animal products with plant-based alternatives (e.g. impossible burger, vegan cheese) in some of your meals in the next month?",
                        Y=="Y2" ~ "How likely are you to try to reduce your overall meat consumption in the next month?",

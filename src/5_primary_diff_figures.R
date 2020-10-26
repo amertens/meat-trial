@@ -16,18 +16,18 @@ source(here("meat_trial_functions.R"))
 load(here("results/unadjusted_regression_results.rdata"))
 
 df <- bind_rows(
-                res_Y1, 
-                res_Y2, 
-                res_Y3)
+                res_Y1_unadj, 
+                res_Y2_unadj, 
+                res_Y3_unadj)
 head(df)
 
 df <- df %>% 
   mutate(ci.lb = est - 1.96*se,
          ci.ub = est + 1.96*se) %>%
   #arrange(reference, reference) %>%
-  mutate(contrast = paste0(intervention, " vs. ", reference), 
+  mutate(contrast = paste0(intervention, " (ref: ", reference,")"), 
          contrast = factor(contrast, levels = rev(unique(contrast))),
-         Y = case_when(Y=="Y1" ~ "How likely are you to try replacing animal products with plant-based alternatives (e.g. "impossible burger," "vegan cheese") in some of your meals in the next month?",
+         Y = case_when(Y=="Y1" ~ "How likely are you to try replacing animal products with plant-based alternatives (e.g. impossible burger, vegan cheese) in some of your meals in the next month?",
                        Y=="Y2" ~ "How likely are you to try to reduce your overall meat consumption in the next month?",
                        Y=="Y3" ~ "How likely are you to encourage your friends or family to try plant-based alternatives to animal products in the next month?"))
 
@@ -63,7 +63,7 @@ df <- df %>%
   #arrange(reference, reference) %>%
   mutate(contrast = paste0(intervention, " vs. ", reference), 
          contrast = factor(contrast, levels = rev(unique(contrast))),
-         Y = case_when(Y=="Y1" ~ "How likely are you to try replacing animal products with plant-based alternatives (e.g. "impossible burger," "vegan cheese") in some of your meals in the next month?",
+         Y = case_when(Y=="Y1" ~ "How likely are you to try replacing animal products with plant-based alternatives (e.g. impossible burger, vegan cheese) in some of your meals in the next month?",
                        Y=="Y2" ~ "How likely are you to try to reduce your overall meat consumption in the next month?",
                        Y=="Y3" ~ "How likely are you to encourage your friends or family to try plant-based alternatives to animal products in the next month?"))
 

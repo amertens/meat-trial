@@ -18,13 +18,31 @@ library(table1)
 
 load(here("data/analysis_dataset.Rdata"))
 
-
-Wvars <- c("ave_cov_att","pre.plant.attitudes","Pre.behavioral.int","Age","Gender",
+Wvars <- c("tr","ave_cov_att","pre.plant.attitudes","Pre.behavioral.int","Age","Gender",
            "Race","Education","income","urbanrural","political.affiliatio","pets")
 
 
+d <- d %>% subset(., select = Wvars) %>%
+  rename(
+  `Attitudes towards Plant-Based Alternatives (pre message)` = pre.plant.attitudes,
+  `Intentions to Reduce Meat Consumption (pre message)` = Pre.behavioral.int,
+  `Average Attitudes towards COVID-19` = ave_cov_att,
+  Income=income,
+  `Area of Residence (urban to rural)` = urbanrural,
+  `Political Affiliation` = political.affiliatio,
+  `Pet Ownership` = pets
+) %>%
+  mutate(Race=factor(Race, labels=c("Black","White","Other")))
 
 
-table1(~ ave_cov_att+pre.plant.attitudes+Pre.behavioral.int+Age+Gender+Race+Education+income+urbanrural+political.affiliatio+pets |tr, data=d)
+
+
+
+
+
+
+# table1(~ ave_cov_att+pre.plant.attitudes+Pre.behavioral.int+Age+Gender+Race+Education+income+urbanrural+political.affiliatio+pets |tr, data=d)
+
+table1(~. |tr, data=d)
 
 ```
