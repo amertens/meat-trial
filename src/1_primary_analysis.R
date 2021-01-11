@@ -1,5 +1,4 @@
 
-
 rm(list=ls())
 library(tidyverse)
 library(caret)
@@ -23,7 +22,7 @@ res_Y2_unadj <- meat.glm(Yname=Yvars[2], Ws=NULL, data=d, family="gaussian")
 res_Y3_unadj <- meat.glm(Yname=Yvars[3], Ws=NULL, data=d, family="gaussian")
 
 save(Yvars, res_Y1_unadj , res_Y2_unadj , res_Y3_unadj , 
-  file=here("results/unadjusted_regression_results.rdata"))
+     file=here("results/unadjusted_regression_results.rdata"))
 
 
 
@@ -78,6 +77,15 @@ for(i in sec_Yvars){
   temp <- meat.glm(Yname=i, Ws=Wdf, data=d, family="gaussian")
   res_sec_adj <- rbind(res_sec_adj, temp)  
 }
+
+res_sec_adj$corrected.p <- p.adjust(res_sec_adj$p, method = "BH")
+
+res_sec_adj<- res_sec_adj %>% group_by(Y) %>% mutate(corrected.p = p.adjust(p, method = "BH"))
+
+length(unique(res_sec_adj$Y))
+res_sec_adj$corrected.p <- res_sec_adj$p *18
+
+knitr::kable(res_sec_adj, digits=2)
 
 save(res_sec_adj, 
      file=here("results/adjusted_secondary_results.rdata"))
